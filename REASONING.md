@@ -81,6 +81,7 @@ Correction: The initial prediction placed `X=tom` as the second answer, but the 
 ## P10
 
 First is pat because the base clause runs first and matches parent(pat,jim). Backtracking into the recursive clause scans parent/2 from the top of kb.pl, finding parent(tom, bob) with ancestor(bob, jim) succeeding via pat before reaching parent(bob, pat). The count is 3 because Prolog finds X=pat, X=tom, and X=bob, then fails on further backtracking.
+ 
 
 ## P11
 
@@ -109,4 +110,6 @@ Due to X > 2 running before X is bounded to anything, comparing X with > throws 
 ## P16
 
 Here, elem(X, [1, 2, 3]) comes first before X > 3, so it successfuly binds X to elements of the list sequentially. 3 passes X > 2, making it the first and only satisfying binding. Backtracking exhausts the remaining choices and finishes with a total count of 3 evaluated attempts.
+
+Correction: The initial prediction recorded a `count` of `3`, but the actual count is `1`. The reasoning correctly identified `X=3` as the only satisfying binding. Therefore, `count` is `1` and not `3`. 
 
