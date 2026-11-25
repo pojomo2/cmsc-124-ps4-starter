@@ -60,6 +60,8 @@ Correction: The initial prediction placed `Y=b` in the second field instead of i
 
 a and b are distinct constants, so the unification fails immediately, so first and second goals are none and count is 0. 
 
+Correction: The initial prediction used `none` for the first and second fields and recorded a count of `1` in the table. The reasoning is correct, but the `none` should be `false` and the count should be `0`. Therefore, the correct entry is `false`, `none`, and `0`.
+
 ## P07
 
 For ann and pat, the condition that tom is the parent of bob was true, so they get binded to X, with a total count of 2. 
