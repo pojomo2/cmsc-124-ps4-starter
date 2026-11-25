@@ -32,7 +32,9 @@ nothing and the search ends after one answer.
 
 ## P01
 
-The goal scans the parent facts in source order and binds X with Liz from the first matching fact. Backtracking continues the scan and binds X to bob for the second answer. No further tom parent facts remain, so the search fails after 2 answers. 
+The goal scans the parent facts in source order and binds X with Liz from the first matching fact. Backtracking continues the scan and binds X to bob for the second answer. No further tom parent facts remain, so the search fails after 2 answers.
+
+Correction: The initial prediction recorded a count of 1, but the reasoning already identified two answers, X=liz and X=bob. Since there are two matching facts in kb.pl, the correct count is 2. The mistake was in the prediction entry, not in the reasoning. 
 
 ## P02
 
