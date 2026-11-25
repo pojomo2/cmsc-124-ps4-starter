@@ -10,7 +10,6 @@ Problem Set 4. The assignment manual defines the work and the submission rules.
 - VINCOY, CLAIRE DANE D. (`@cdvincoy`)
 - CUDIAMAT, DREW T. (`@pojomo2`)
 
-
 ## Layout
 
 ```text
