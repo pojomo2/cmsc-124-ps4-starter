@@ -7,7 +7,7 @@ P05	X=a, Y=b	none	1
 P06	false	none	0
 P07	X=ann	X=pat	2
 P08	X=liz	X=bob	6
-P09	X=sue	X=tom	6
+P09	X=sue	X=jim	6
 P10	X=pat	X=bob	3
 P11	unbounded	unbounded	unbounded
 P12	true	unbounded	unbounded

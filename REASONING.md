@@ -74,7 +74,10 @@ because the ancestor puts first the base clause parent(A, D) before its recursiv
 
 ## P09
 
-Because ancestor_r places its recursive clause before its base clause. the language recurses into child branches before trying direct parent matches, reversing the answer order relative to ancestor. Since the tree is fintie and acyclic, backtracking still visits every valid descendant, matching the total count of ancestor in P08 
+Because ancestor_r places its recursive clause before its base clause. the language recurses into child branches before trying direct parent matches, reversing the answer order relative to ancestor. Since the tree is finite and acyclic, backtracking still visits every valid descendant, matching the total count of ancestor in P08
+
+Correction: The initial prediction placed `X=tom` as the second answer, but the actual output was `X=jim`. Since the recursive clause is tried first, Prolog explores the descendants of `bob` before returning to the direct parent matches. `bob's` another child is `pat` and `pat's` child is `jim`.
+
 ## P10
 
 First is pat because the base clause runs first and matches parent(pat,jim). Backtracking into the recursive clause scans parent/2 from the top of kb.pl, finding parent(tom, bob) with ancestor(bob, jim) succeeding via pat before reaching parent(bob, pat). The count is 3 because Prolog finds X=pat, X=tom, and X=bob, then fails on further backtracking.
