@@ -90,7 +90,7 @@ reach/2 is left-recursive, so querying reach(a, d) immediately calls reach(a, Z1
 
 reach_r/2 tests reachability over edge/2 facts and its right-recursive clause, returning true whena valid path exists. Because edge/2 has a cycle (a -> b -> c -> a) and reach_r/2 tracks no visited set, backtracking loops around the cycle endlessly and exhausts the search budget. 
 
-Correction: The initial prediction recorded unbounded in the second field, but the actual output is true. Since the graph contains a cycle, Prolog can revisit the same nodes and find another successful path to d. The count remains unbounded because the search continues and does not terminate.  
+Correction: The initial prediction recorded `unbounded` in the second field, but the actual output is `true`. Since the graph contains a cycle, Prolog can revisit the same nodes and find another successful path to `d`. The count remains `unbounded` because the search continues and does not terminate.  
 
 ## P13
 
@@ -98,7 +98,9 @@ Correction: The initial prediction recorded unbounded in the second field, but t
 
 ## P14
 
-The base clause join([], L, L) matches immediately when X is empty, binding Y to the full list [1, 2]. Backtracking into the recusrive clause koin([H|T], L, [H|R]) peels off elements one by one, giving intermediate partitions like X=[1], Y=[2]. Once all 3 valid ways to partition a two-element list are exhausted, the search terminates with a count of 3. 
+The base clause join([], L, L) matches immediately when X is empty, binding Y to the full list [1, 2]. Backtracking into the recusrive clause join([H|T], L, [H|R]) peels off elements one by one, giving intermediate partitions like X=[1], Y=[2]. Once all 3 valid ways to partition a two-element list are exhausted, the search terminates with a count of 3. 
+
+Correction: The initial prediction placed `X=[1,2],Y=[]` in the second field, but the actual output is `X=[1],Y=[2]`. The recursive clause takes the head of the result list and places it in the first list, while the remaining elements are handled by the recursive call. Therefore, the second field is `X=[1],Y=[2]`.
 
 ## P15
 
