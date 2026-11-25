@@ -68,9 +68,9 @@ For ann and pat, the condition that tom is the parent of bob was true, so they g
 
 Correction: The mistake in the table entry is similar to the previous items. The reasoning is correct. Therefore, the count is `2`.
 
-P08
+## P08
 
-because the ancestor puts first the base clause parent(A, D) before its recursive clause, checking the direct parent relationships in source order first. After the direct matches are exhausted, backtracking enters the recursive clause to do multi-step descendent branches through the finite family tree, and evaluates all valid answers with a total count of 6.
+because the ancestor puts first the base clause parent(A, D) before its recursive clause, checking the direct parent relationships in source order first. After the direct matches are exhausted, backtracking enters the recursive clause to do multi-step descendant branches through the finite family tree, and evaluates all valid answers with a total count of 6.
 
 ## P09
 
@@ -82,6 +82,7 @@ Correction: The initial prediction placed `X=tom` as the second answer, but the 
 
 First is pat because the base clause runs first and matches parent(pat,jim). Backtracking into the recursive clause scans parent/2 from the top of kb.pl, finding parent(tom, bob) with ancestor(bob, jim) succeeding via pat before reaching parent(bob, pat). The count is 3 because Prolog finds X=pat, X=tom, and X=bob, then fails on further backtracking.
  
+Correction: The initial prediction placed `X=bob` in the second field, but the actual answer is `X=tom`. The recursive clause first finds `parent(tom,bob)`, and the recursive call `ancestor(bob,jim)` succeeds through Pat. Therefore, the second field answer is `X=tom` because it appeared first as a successful result than `X=bob`.
 
 ## P11
 
