@@ -68,16 +68,21 @@ For ann and pat, the condition that tom is the parent of bob was true, so they g
 
 Correction: The mistake in the table entry is similar to the previous items. The reasoning is correct. Therefore, the count is `2`.
 
-P08
+## P08
 
-because the ancestor puts first the base clause parent(A, D) before its recursive clause, checking the direct parent relationships in source order first. After the direct matches are exhausted, backtracking enters the recursive clause to do multi-step descendent branches through the finite family tree, and evaluates all valid answers with a total count of 6.
+because the ancestor puts first the base clause parent(A, D) before its recursive clause, checking the direct parent relationships in source order first. After the direct matches are exhausted, backtracking enters the recursive clause to do multi-step descendant branches through the finite family tree, and evaluates all valid answers with a total count of 6.
 
 ## P09
 
-Because ancestor_r places its recursive clause before its base clause. the language recurses into child branches before trying direct parent matches, reversing the answer order relative to ancestor. Since the tree is fintie and acyclic, backtracking still visits every valid descendant, matching the total count of ancestor in P08 
+Because ancestor_r places its recursive clause before its base clause. the language recurses into child branches before trying direct parent matches, reversing the answer order relative to ancestor. Since the tree is finite and acyclic, backtracking still visits every valid descendant, matching the total count of ancestor in P08
+
+Correction: The initial prediction placed `X=tom` as the second answer, but the actual output was `X=jim`. Since the recursive clause is tried first, Prolog explores the descendants of `bob` before returning to the direct parent matches. `bob's` another child is `pat` and `pat's` child is `jim`.
+
 ## P10
 
 First is pat because the base clause runs first and matches parent(pat,jim). Backtracking into the recursive clause scans parent/2 from the top of kb.pl, finding parent(tom, bob) with ancestor(bob, jim) succeeding via pat before reaching parent(bob, pat). The count is 3 because Prolog finds X=pat, X=tom, and X=bob, then fails on further backtracking.
+ 
+Correction: The initial prediction placed `X=bob` in the second field, but the actual answer is `X=tom`. The recursive clause first finds `parent(tom,bob)`, and the recursive call `ancestor(bob,jim)` succeeds through Pat. Therefore, the second field answer is `X=tom` because it appeared first as a successful result than `X=bob`.
 
 ## P11
 
@@ -85,7 +90,9 @@ reach/2 is left-recursive, so querying reach(a, d) immediately calls reach(a, Z1
 
 ## P12
 
-reach_r/2 tests reachability over edge/2 facts and its right-recursive clause, returning true whena valid path exists. Because edge/2 has a cycle (a -> b -> c -> a) and reach_r/2 tracks no visited set, backtracking loops around the cycle endlessly and exhausts the serach budget. 
+reach_r/2 tests reachability over edge/2 facts and its right-recursive clause, returning true whena valid path exists. Because edge/2 has a cycle (a -> b -> c -> a) and reach_r/2 tracks no visited set, backtracking loops around the cycle endlessly and exhausts the search budget. 
+
+Correction: The initial prediction recorded `unbounded` in the second field, but the actual output is `true`. Since the graph contains a cycle, Prolog can revisit the same nodes and find another successful path to `d`. The count remains `unbounded` because the search continues and does not terminate.  
 
 ## P13
 
@@ -93,7 +100,9 @@ reach_r/2 tests reachability over edge/2 facts and its right-recursive clause, r
 
 ## P14
 
-The base clause join([], L, L) matches immediately when X is empty, binding Y to the full list [1, 2]. Backtracking into the recusrive clause koin([H|T], L, [H|R]) peels off elements one by one, giving intermediate partitions like X=[1], Y=[2]. Once all 3 valid ways to partition a two-element list are exhausted, the search terminates with a count of 3. 
+The base clause join([], L, L) matches immediately when X is empty, binding Y to the full list [1, 2]. Backtracking into the recusrive clause join([H|T], L, [H|R]) peels off elements one by one, giving intermediate partitions like X=[1], Y=[2]. Once all 3 valid ways to partition a two-element list are exhausted, the search terminates with a count of 3. 
+
+Correction: The initial prediction placed `X=[1,2],Y=[]` in the second field, but the actual output is `X=[1],Y=[2]`. The recursive clause takes the head of the result list and places it in the first list, while the remaining elements are handled by the recursive call. Therefore, the second field is `X=[1],Y=[2]`.
 
 ## P15
 
@@ -102,4 +111,6 @@ Due to X > 2 running before X is bounded to anything, comparing X with > throws 
 ## P16
 
 Here, elem(X, [1, 2, 3]) comes first before X > 3, so it successfuly binds X to elements of the list sequentially. 3 passes X > 2, making it the first and only satisfying binding. Backtracking exhausts the remaining choices and finishes with a total count of 3 evaluated attempts.
+
+Correction: The initial prediction recorded a `count` of `3`, but the actual count is `1`. The reasoning correctly identified `X=3` as the only satisfying binding. Therefore, `count` is `1` and not `3`. 
 
