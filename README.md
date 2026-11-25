@@ -7,8 +7,8 @@ Problem Set 4. The assignment manual defines the work and the submission rules.
  
 ## Members
 
-VINCOY, CLAIRE DANE D.
-CUDIAMAT, DREW T. 
+- VINCOY, CLAIRE DANE D. (`@cdvincoy`)
+- CUDIAMAT, DREW T. (`@pojomo2`)
 
 
 ## Layout
