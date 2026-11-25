@@ -42,6 +42,8 @@ descendant(D, A) :-
 
 % count_of(X, List, N): X occurs N times in List. N is 0 for the empty
 % list, which is your base case.
+
+count_of(_, [], 0).
 count_of(X, [X|T], N) :-
     count_of(X, T, NT),
     N is NT + 1.
@@ -54,16 +56,16 @@ count_of(X, [H|T], N) :-
 % order. Reverse the tail. Then use join/3 to put the head at the end.
 rev([], []).
 
-rev(X, [H|T], Reversed) :-
+rev([H|T], Reversed) :-
     rev(T, RT),
-    join(RT, [H], Reversed)
+    join(RT, [H], Reversed).
 
 % last_of(List, X): X is the last element of List. The empty list has no
 % last element, so last_of([], X) must fail.
 last_of([X], X).
 
 last_of([_|T], Last) :-
-    last_of(T, Last),
+    last_of(T, Last).
 
 %%% R3 -- the graph.
 
@@ -75,5 +77,15 @@ last_of([_|T], Last) :-
 % the cycle a -> b -> c -> a always offers one more edge. Carry the nodes
 % you visited. Refuse to step onto one again. \+ Goal is true when Goal
 % cannot be proved. That is how you say "not yet visited."
-route(_, _, _) :-
-    throw(not_implemented(route/3)).
+% throw(not_implemented(route/3)).
+
+route(From, To, Path) :-
+    travel(From, To, [From], BackwardPath),    % builds the path in reverse order using the visited list
+    rev(BackwardPath, Path).                   % reverse the path to get the correct order
+
+travel(To, To, Visited, Visited).              % the destination has been reached, so visited contains the complete path in reverse order 
+
+travel(From, To, Visited, Path) :-             
+    edge(From, Next),                          % finds a node connected to the current node 
+    \+ elem(Next, Visited),                    % ensures that the next node has not already been visited
+    travel(Next, To, [Next|Visited], Path).    % adds the next node to the visited list and continue
