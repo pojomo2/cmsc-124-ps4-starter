@@ -66,6 +66,8 @@ Correction: The initial prediction used `none` for the first and second fields a
 
 For ann and pat, the condition that tom is the parent of bob was true, so they get binded to X, with a total count of 2. 
 
+Correction: The mistake in the table entry is similar to the previous items. The reasoning is correct. Therefore, the count is `2`.
+
 P08
 
 because the ancestor puts first the base clause parent(A, D) before its recursive clause, checking the direct parent relationships in source order first. After the direct matches are exhausted, backtracking enters the recursive clause to do multi-step descendent branches through the finite family tree, and evaluates all valid answers with a total count of 6.
