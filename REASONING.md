@@ -54,6 +54,8 @@ The first goal unifies X with the compound term f(Y, a) while Y remains unbound.
 
 f(X, b) = f(a, Y) binds together the variables and the atoms together, and so X binds to a and Y binds to b. This one operation counts as one success on the count. 
 
+Correction: The initial prediction placed `Y=b` in the second field instead of including it with `X=a` in the first field. Both bindings belong to the same answer because of the unification operation. The correct entry is `X=a, Y=b`, followed by `none` for the second field.
+
 ## P06
 
 a and b are distinct constants, so the unification fails immediately, so first and second goals are none and count is 0. 
